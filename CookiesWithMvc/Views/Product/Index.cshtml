@@ -1,0 +1,33 @@
+@model IEnumerable<CookiesWithMvc.Models.Product>
+@{
+    ViewData["Title"] = "Список продуктов";
+}
+
+<h2>Список продуктов</h2>
+
+<a class="btn btn-primary mb-3" asp-action="Create">Добавить продукт</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Price ₽</td>
+                <td>
+                    <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@product.Id">Редактировать</a>
+                    <form asp-action="Delete" asp-route-id="@product.Id" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-danger">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
